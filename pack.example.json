@@ -1,0 +1,31 @@
+{
+  "providerID": "example-gateway",
+  "baseURL": "https://gateway.example.com/v1",
+  "verifiedAt": "2026-01-01",
+  "models": [
+    {
+      "id": "example-chat-31b",
+      "backing": "Example-Chat-31B",
+      "tools": true,
+      "input": ["text", "image"],
+      "limit": { "context": 128000, "input": 108000, "output": 16000 },
+      "tiers": ["none", "low", "medium", "high"],
+      "defaultTier": "medium",
+      "enforcement": "validated",
+      "advert": { "vision": true, "video": false, "inputLimit": 125000, "outputLimit": 20000 },
+      "verifiedAt": "2026-01-01",
+      "notes": "Free-text note rendered by /specs:show; delete when unused."
+    },
+    {
+      "id": "example-coder-30b",
+      "backing": "Example-Coder-30B",
+      "tools": true,
+      "input": ["text"],
+      "limit": { "context": 64000, "input": 48000, "output": 8000 },
+      "tiers": [],
+      "enforcement": "validated",
+      "advert": { "vision": false, "video": false, "inputLimit": 125000, "outputLimit": 20000 },
+      "verifiedAt": "2026-01-01"
+    }
+  ]
+}

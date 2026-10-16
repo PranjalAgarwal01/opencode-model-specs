@@ -1,0 +1,11 @@
+node_modules/
+coverage/
+*.tsbuildinfo
+.DS_Store
+
+# dist/ is committed on purpose: git-based plugin installs must work without a
+# build toolchain (opencode's installer does not run the prepare script).
+!dist/
+
+# Live probe captures are per-deployment data — never committed.
+test/fixtures/live/

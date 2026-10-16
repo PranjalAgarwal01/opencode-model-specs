@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "opencode-model-specs",
+  "version": "0.3.0",
+  "description": "OpenCode 2.x plugin: overlays live-verified model specs (limits, modalities, thinking tiers) from a user-supplied spec pack onto a provider catalog; ships /specs:show and /specs:probe.",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "litellm",
+    "vllm",
+    "model-discovery",
+    "model-specs",
+    "reasoning-effort"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PranjalAgarwal01/opencode-model-specs.git"
+  },
+  "homepage": "https://github.com/PranjalAgarwal01/opencode-model-specs#readme",
+  "bugs": {
+    "url": "https://github.com/PranjalAgarwal01/opencode-model-specs/issues"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./server": "./server.js"
+  },
+  "files": [
+    "dist",
+    "server.js",
+    "pack.example.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:live": "vitest run test/live.probe.test.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@opencode/plugin": "2.0.30"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.8.0",
+    "vitest": "^5.0.5"
+  }
+}
