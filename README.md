@@ -59,11 +59,21 @@ via `/connect`, or `settings.apiKey`), discovered models materialized (e.g. by
 [opencode-models-discovery](https://github.com/yuhp/opencode-models-discovery)), and a spec pack
 (see below).
 
+Clone the repo and install the runtime dependency once:
+
+```powershell
+git clone https://github.com/PranjalAgarwal01/opencode-model-specs.git C:\tools\opencode-model-specs
+cd C:\tools\opencode-model-specs
+npm install --omit=dev
+```
+
+Then add the checkout to the global `plugins` array (a plain absolute path works too):
+
 ```jsonc
 // ~/.config/opencode/opencode.jsonc — global plugins array
 "plugins": [
   "opencode-models-discovery@2.0.0-rc.2",      // or your own discovery setup
-  "file:///C:/path/to/opencode-model-specs"    // local checkout (a plain absolute path also works)
+  "file:///C:/tools/opencode-model-specs"      // the local checkout
 ]
 ```
 
@@ -71,11 +81,16 @@ then `opencode service restart`.
 
 Notes:
 
-- Keep the checkout built (`npm run build`) — directory plugins load `dist/` as-is.
+- `dist/` is committed — no build step is needed. `npm install` only provides the runtime
+  `@opencode/plugin` dependency; on Node older than the `engines` floor it prints a warning
+  (OpenCode runs plugins on its own bundled runtime).
 - The repo root ships `server.js`, the entrypoint OpenCode's loader expects for directory
   plugins (`<directory>/server`). Keep it in the checkout.
-- Once the package is pushed/published you can instead use `opencode plugin add <package or
-  git specifier>`; `opencode plugin add file:...` is rejected by the CLI by design.
+- `opencode plugin add file:...` is rejected by the CLI by design — edit `plugins` directly.
+- `opencode plugin add <registry package>` is the nicest path for npm-published packages. The
+  git-specifier form (`git+https://github.com/PranjalAgarwal01/opencode-model-specs.git#v0.3.0`)
+  failed with `git dep preparation failed` in OpenCode 2.0.30's bundled installer when tested on
+  Windows, while plain `npm install` from the same specifier succeeds — prefer the checkout above.
 
 ## The pack
 
